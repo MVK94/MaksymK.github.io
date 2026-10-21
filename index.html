@@ -1,1 +1,198 @@
 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Моя страница</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #101114;
+      color: #eeeeee;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      padding: 24px;
+      border-bottom: 1px solid #333;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin: 0;
+    }
+
+    nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background: #24262b;
+      color: white;
+      border: 1px solid #444;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    button:hover {
+      background: #383b44;
+    }
+
+    button.active {
+      background: #e8e8e8;
+      color: #111;
+    }
+
+    main {
+      max-width: 850px;
+      margin: 70px auto;
+      padding: 0 24px;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    h2 {
+      font-size: 42px;
+      margin-bottom: 16px;
+    }
+
+    p {
+      color: #b7b7bd;
+      line-height: 1.7;
+    }
+
+    .card {
+      margin-top: 24px;
+      padding: 22px;
+      background: #191a1f;
+      border: 1px solid #333;
+      border-radius: 12px;
+    }
+
+    footer {
+      padding: 24px;
+      color: #777;
+      border-top: 1px solid #333;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>MaksymK</h1>
+
+    <nav>
+      <button class="active" data-page="home">Home</button>
+      <button data-page="projects">Projects</button>
+      <button data-page="about">About</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="page active">
+      <h2>Привет, я Максим.</h2>
+      <p>
+        Создаю устройства, изучаю программирование
+        и экспериментирую с электроникой.
+      </p>
+
+      <div class="card">
+        <h3>Моя первая интерактивная страница</h3>
+        <p>Нажми кнопку и проверь, как работает JavaScript.</p>
+        <button id="counterButton">Нажатий: 0</button>
+      </div>
+    </section>
+
+    <section id="projects" class="page">
+      <h2>Проекты</h2>
+
+      <div class="card">
+        <h3>ESP32</h3>
+        <p>Микроконтроллеры, датчики и автоматизация.</p>
+      </div>
+
+      <div class="card">
+        <h3>3D-моделирование</h3>
+        <p>Корпуса устройств, сборки и визуализация.</p>
+      </div>
+
+      <div class="card">
+        <h3>Python</h3>
+        <p>Скрипты, веб-приложения и автоматизация.</p>
+      </div>
+    </section>
+
+    <section id="about" class="page">
+      <h2>Обо мне</h2>
+      <p>
+        Здесь можно рассказать о себе, своих навыках
+        и интересах.
+      </p>
+      <button id="helloButton">Поздороваться</button>
+      <p id="message"></p>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 MaksymK
+  </footer>
+
+  <script>
+    const tabs = document.querySelectorAll("[data-page]");
+    const pages = document.querySelectorAll(".page");
+
+    tabs.forEach(button => {
+      button.addEventListener("click", () => {
+        tabs.forEach(tab => tab.classList.remove("active"));
+        pages.forEach(page => page.classList.remove("active"));
+
+        button.classList.add("active");
+
+        document
+          .getElementById(button.dataset.page)
+          .classList.add("active");
+      });
+    });
+
+    let count = 0;
+
+    document
+      .getElementById("counterButton")
+      .addEventListener("click", () => {
+        count++;
+        document.getElementById("counterButton").textContent =
+          `Нажатий: ${count}`;
+      });
+
+    document
+      .getElementById("helloButton")
+      .addEventListener("click", () => {
+        document.getElementById("message").textContent =
+          "Привет! Кнопка работает.";
+      });
+  </script>
+</body>
+</html>
+
